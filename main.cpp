@@ -7,14 +7,19 @@
 
 #include <iostream>
 
-#include "src/Coroutine.h"
+#include "SkywalkerCoroutine/SkywalkerCoroutine.h"
+
+SkywalkerCo_Create(SkywalkerCoTest);
 
 int main()
 {
-    MyFuture<int> result = async_wait(2); // 启动协程，等待2秒
+    MyFuture<int> result = Create(2); // 启动协程，等待2秒
     std::cout << "Waiting..." << std::endl;
     // 获取协程的结果
     std::cout << "Result: " << result.get() << std::endl;
+
+    SkywalkerCoTest co = SkywalkerCoTestCreate();
+    co.get();
 
     return 0;
 }
