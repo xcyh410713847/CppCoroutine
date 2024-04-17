@@ -21,8 +21,11 @@ struct co_return_test1
             coro_handle.destroy();
     }
 
+    /**
+     * 获取协程的返回值
+    */
     T get()
-    { // 获取异步结果
+    {
         if (coro_handle)
         {
             coro_handle.resume();
@@ -36,14 +39,37 @@ struct co_return_test1
 template <typename T>
 struct co_return_test1<T>::promise_type
 {
+    /**
+     * 协程的返回值
+     */
     T value;
+
+    /**
+     * 协程的初始
+     */
     std::suspend_always initial_suspend() { return {}; }
+
+    /**
+     * 协程的最终
+     */
     std::suspend_always final_suspend() noexcept { return {}; }
+
+    /**
+     * 协程的返回对象
+     */
     auto get_return_object()
     {
         return co_return_test1<T>{handle_type::from_promise(*this)};
     }
-    void return_value(T v) { value = v; } // 设置协程返回值
+
+    /**
+     * 设置协程返回值
+     */
+    void return_value(T v) { value = v; }
+
+    /**
+     * 异常处理
+     */
     void unhandled_exception()
     {
         std::exit(1); // 简单处理异常：直接退出程序
