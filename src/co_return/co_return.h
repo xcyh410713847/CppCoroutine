@@ -11,13 +11,15 @@
 
 #include <iostream>
 
+#include "co_return_test.h"
 #include "co_return_test1.h"
 #include "co_return_test2.h"
 #include "co_return_test3.h"
 
 void co_return_test()
 {
-    std::cout << "co_return_test" << std::endl;
+    auto co = co_return_test_create();
+    co.get();
 
     // 单个返回值
     auto co1_1 = co_return_test1_create<int>(9527);
