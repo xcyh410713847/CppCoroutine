@@ -16,7 +16,7 @@
 #include "co_return_test2.h"
 #include "co_return_test3.h"
 
-void co_return_test()
+void test_co_return()
 {
     auto co = co_return_test_create();
     co.get();

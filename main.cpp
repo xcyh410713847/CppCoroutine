@@ -20,7 +20,7 @@ int main()
     SkywalkerCoTest co = SkywalkerCoTestCreate();
     co.get();
 
-    co_return_test();
+    test_co_return();
     co_await_test();
     co_yield_test();
 
