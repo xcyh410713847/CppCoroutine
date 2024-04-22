@@ -19,9 +19,11 @@ int main()
 {
     SkywalkerCoTest co = SkywalkerCoTestCreate();
     co.get();
-
+    std::cout << "-------------------------------------------------------------------------------" << std::endl;
     test_co_return();
-    co_await_test();
+    std::cout << "-------------------------------------------------------------------------------" << std::endl;
+    test_co_await();
+    std::cout << "-------------------------------------------------------------------------------" << std::endl;
     co_yield_test();
 
     return 0;

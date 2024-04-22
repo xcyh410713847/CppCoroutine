@@ -16,11 +16,11 @@ struct co_return_test
 
     co_return_test(handle_type h) : coro_handle(h)
     {
-        std::cout << "co_return_test co_return_test" << std::endl;
+        std::cout << "co_return_test " << this << " co_return_test" << std::endl;
     }
     ~co_return_test()
     {
-        std::cout << "co_return_test ~co_return_test" << std::endl;
+        std::cout << "co_return_test " << this << " ~co_return_test" << std::endl;
         if (coro_handle)
             coro_handle.destroy();
     }
@@ -30,7 +30,7 @@ struct co_return_test
      */
     void get()
     {
-        std::cout << "co_return_test get" << std::endl;
+        std::cout << "co_return_test " << this << " get" << std::endl;
         if (coro_handle)
         {
             coro_handle.resume();
@@ -47,7 +47,7 @@ struct co_return_test::promise_type
      */
     std::suspend_always initial_suspend()
     {
-        std::cout << "co_return_test initial_suspend" << std::endl;
+        std::cout << "co_return_test " << this << " initial_suspend" << std::endl;
         return {};
     }
 
@@ -56,7 +56,7 @@ struct co_return_test::promise_type
      */
     std::suspend_always final_suspend() noexcept
     {
-        std::cout << "co_return_test final_suspend" << std::endl;
+        std::cout << "co_return_test " << this << " final_suspend" << std::endl;
         return {};
     }
 
@@ -65,7 +65,7 @@ struct co_return_test::promise_type
      */
     auto get_return_object()
     {
-        std::cout << "co_return_test get_return_object" << std::endl;
+        std::cout << "co_return_test " << this << " get_return_object" << std::endl;
         return co_return_test{co_return_test::handle_type::from_promise(*this)};
     }
 
@@ -74,7 +74,7 @@ struct co_return_test::promise_type
      */
     void return_void()
     {
-        std::cout << "co_return_test return_void" << std::endl;
+        std::cout << "co_return_test " << this << " return_void" << std::endl;
     }
 
     /**
@@ -82,7 +82,7 @@ struct co_return_test::promise_type
      */
     void unhandled_exception()
     {
-        std::cout << "co_return_test unhandled_exception" << std::endl;
+        std::cout << "co_return_test " << this << " unhandled_exception" << std::endl;
         std::exit(1); // 简单处理异常：直接退出程序
     }
 };

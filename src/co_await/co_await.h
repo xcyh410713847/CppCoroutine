@@ -11,7 +11,9 @@
 
 #include <iostream>
 
-void co_await_test()
+#include "co_await_test.h"
+
+void test_co_await()
 {
-    std::cout << "co_await_test" << std::endl;
+    auto co = co_await_test_create();
 }
