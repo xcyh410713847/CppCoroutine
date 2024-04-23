@@ -16,4 +16,11 @@
 void test_co_await()
 {
     auto co = co_await_test_create();
+    std::cout << "test_co_await " << &co << std::endl;
+    std::cout << "test_co_await co.coro_handle " << &co.coro_handle << std::endl;
+    std::cout << "test_co_await done: " << co.coro_handle.done() << std::endl; // 检查协程状态
+    co.coro_handle.resume();                                                   // 启动协程
+    std::cout << "test_co_await " << &co << std::endl;
+    std::cout << "test_co_await co.coro_handle " << &co.coro_handle << std::endl;
+    std::cout << "test_co_await done: " << co.coro_handle.done() << std::endl; // 检查协程状态
 }
