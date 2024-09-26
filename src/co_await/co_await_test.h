@@ -9,41 +9,6 @@
 #include <iostream>
 
 // 协程的返回对象
-struct co_await_return
-{
-    co_await_return()
-    {
-        std::cout << "co_await_return " << this << " co_await_return" << std::endl;
-    }
-
-    ~co_await_return()
-    {
-        std::cout << "co_await_return " << this << " ~co_await_return" << std::endl;
-    }
-
-    bool await_ready() const noexcept
-    {
-        std::cout << "co_await_return " << this << " await_ready" << std::endl;
-        // false表示需要挂起
-        return false;
-    }
-
-    void await_suspend(std::coroutine_handle<> h) const noexcept
-    {
-        // 挂起当前协程
-        std::cout << "co_await_return " << this << " await_suspend" << std::endl;
-        std::cout << "co_await_return await_suspend h " << &h << std::endl;
-        std::cout << "co_await_return await_suspend h.address " << h.address() << std::endl;
-    }
-
-    void await_resume() const noexcept
-    {
-        // 恢复当前协程
-        std::cout << "co_await_return " << this << " await_resume" << std::endl;
-    }
-};
-
-// 协程的返回对象
 struct co_await_test
 {
     struct promise_type;
@@ -91,6 +56,41 @@ struct co_await_test::promise_type
     {
         std::cout << "co_await_test::promise_type " << this << " unhandled_exception" << std::endl;
         std::exit(1);
+    }
+};
+
+// 协程的返回对象
+struct co_await_return
+{
+    co_await_return()
+    {
+        std::cout << "co_await_return " << this << " co_await_return" << std::endl;
+    }
+
+    ~co_await_return()
+    {
+        std::cout << "co_await_return " << this << " ~co_await_return" << std::endl;
+    }
+
+    bool await_ready() const noexcept
+    {
+        std::cout << "co_await_return " << this << " await_ready" << std::endl;
+        // false表示需要挂起
+        return false;
+    }
+
+    void await_suspend(std::coroutine_handle<> h) const noexcept
+    {
+        // 挂起当前协程
+        std::cout << "co_await_return " << this << " await_suspend" << std::endl;
+        std::cout << "co_await_return await_suspend h " << &h << std::endl;
+        std::cout << "co_await_return await_suspend h.address " << h.address() << std::endl;
+    }
+
+    void await_resume() const noexcept
+    {
+        // 恢复当前协程
+        std::cout << "co_await_return " << this << " await_resume" << std::endl;
     }
 };
 
